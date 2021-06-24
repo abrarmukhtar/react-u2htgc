@@ -1,6 +1,7 @@
-const addNumber = () => {
+const addNumber = data => {
   return {
-    type: 'add'
+    type: 'add',
+    payload: data
   };
 };
 

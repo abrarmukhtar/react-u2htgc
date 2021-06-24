@@ -1,4 +1,4 @@
-const initState = 0;
+const initState = [{}];
 
 const AddReducer = (state = initState, action) => {
   switch (action.type) {
