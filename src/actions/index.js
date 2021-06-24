@@ -1,5 +1,7 @@
-const addNumber = {
-  type: 'add'
+const addNumber = () => {
+  return {
+    type: 'add'
+  };
 };
 
 export default addNumber;
