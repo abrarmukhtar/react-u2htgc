@@ -1,33 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import ContactForm from './ContactForm';
+import { useSelector, useDispatch } from 'react-redux';
 import firebasedb from './fire';
 
 const Contacts = () => {
-  const [fdata, setfData] = useState([]);
   const [currentId, setCurrentId] = useState('');
 
-  const addorEdit = obj => {
-    if (currentId == '') {
-      setfData([...fdata, obj]);
-    } else {
-      fdata[currentId] = obj;
-      setCurrentId('');
-    }
-  };
+  const formData = useSelector(state => state.addReducer.newData);
+  console.log(formData);
+  const addorEdit = obj => {};
 
-  const deleteRecord = id => {
-    if (confirm('Do you want to delete')) {
-      setfData(
-        fdata.filter((array, index) => {
-          return index != id;
-        })
-      );
-    }
-  };
+  const deleteRecord = id => {};
 
   return (
     <>
-      <ContactForm {...{ addorEdit, currentId, fdata, setCurrentId }} />
+      <ContactForm />
 
       <table className="table">
         <thead>
@@ -39,13 +26,13 @@ const Contacts = () => {
           </tr>
         </thead>
 
-        {Object.keys(fdata).map(index => {
+        {formData.map((elm, index) => {
           return (
             <tbody key={index}>
               <tr>
-                <td scope="row">{fdata[index].fname}</td>
-                <td scope="row">{fdata[index].lname}</td>
-                <td scope="row">{fdata[index].fatherName}</td>
+                <td scope="row">{elm.data.fname}</td>
+                <td scope="row">{elm.data.lname}</td>
+                <td scope="row">{elm.data.fatherName}</td>
                 <td>
                   <a
                     href="#"

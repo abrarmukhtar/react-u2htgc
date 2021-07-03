@@ -1,12 +1,24 @@
-const initState = [{}];
+export const initState = {
+  newData: []
+};
 
-const AddReducer = (state = initState, action) => {
+const formReducer = (state = initState, action) => {
   switch (action.type) {
     case 'add':
-      return state + 1;
+      const { id, data } = action.payload;
+      return {
+        ...state,
+        newData: [
+          ...state.newData,
+          {
+            id: id,
+            data: data
+          }
+        ]
+      };
     default:
       return state;
   }
 };
 
-export default AddReducer;
+export default formReducer;

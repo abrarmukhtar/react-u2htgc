@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { initState, addRecord } from './actions/index';
 const ContactForm = props => {
-  const initData = {
-    fname: '',
-    lname: '',
-    fatherName: ''
-  };
-  const [inputData, setInputData] = useState(initData);
+  // const initData = {
+  //   fname: '',
+  //   lname: '',
+  //   fatherName: ''
+  // };
+
+  const dispatch = useDispatch();
+  const [inputData, setInputData] = useState(initState);
 
   const inputEvent = e => {
     const { name, value } = e.target;
@@ -17,39 +20,41 @@ const ContactForm = props => {
     });
   };
 
-  useEffect(() => {
-    if (props.currentId == '') {
-      setInputData({ ...initData });
-    } else {
-      setInputData({ ...props.fdata[props.currentId] });
-    }
-  }, [props.currentId, props.fdata]);
+  // useEffect(() => {
+  //   if (props.currentId == '') {
+  //     setInputData({ ...initData });
+  //   } else {
+  //     setInputData({ ...props.fdata[props.currentId] });
+  //   }
+  // }, [props.currentId, props.fdata]);
 
   const submitEvent = e => {
     e.preventDefault();
-    if (inputData.lname == '' || inputData.fname == '') {
-    } else {
-      props.addorEdit(inputData);
-      setInputData(initData);
-    }
-    document.getElementById('fname').focus();
+    dispatch(addRecord(inputData));
+    // if (inputData.lname == '' || inputData.fname == '') {
+    // } else {
+    //   props.addorEdit(inputData);
+    //   setInputData(initData);
+    // }
+    // document.getElementById('fname').focus();
   };
 
   const UpdateRecord = e => {
     e.preventDefault();
-    if (confirm('Do you want to update')) {
-      props.addorEdit(inputData);
-      document.getElementById('fname').focus();
-    } else {
-    }
+
+    // if (confirm('Do you want to update')) {
+    //   props.addorEdit(inputData);
+    //   document.getElementById('fname').focus();
+    // } else {
+    // }
   };
 
   const clearContant = () => {
-    setInputData(initData);
-    props.setCurrentId('');
+    // setInputData(initData);
+    // props.setCurrentId('');
   };
   return (
-    <form onSubmit={props.currentId == '' ? submitEvent : UpdateRecord}>
+    <form onSubmit={submitEvent} autoComplete="off">
       <div className="col-md-6">
         <label className="form-label">First Name</label>
         <input
@@ -85,24 +90,13 @@ const ContactForm = props => {
       </div>
 
       <div className="col-12">
-        {props.currentId == '' ? (
-          <input
-            type="submit"
-            className="btn btn-primary"
-            value={props.currentId == '' ? 'Save' : 'Update'}
-          />
-        ) : (
-          <div>
-            <input
-              type="submit"
-              className="btn btn-primary"
-              value={props.currentId == '' ? 'Save' : 'Update'}
-            />
-          </div>
-        )}
-        <button className="btn btn-primary" onClick={clearContant}>
+        <div>
+          <input type="submit" className="btn btn-primary" value={'Save'} />
+        </div>
+
+        {/* <button className="btn btn-primary" onClick={clearContant}>
           Clear
-        </button>
+        </button> */}
       </div>
     </form>
   );

@@ -1,8 +1,12 @@
-const addNumber = data => {
-  return {
-    type: 'add',
-    payload: data
-  };
+export const initState = {
+  fname: '',
+  lname: '',
+  fatherName: ''
 };
 
-export default addNumber;
+export const addRecord = data => {
+  return {
+    type: 'add',
+    payload: { id: new Date().getTime().toString(), data: data }
+  };
+};
