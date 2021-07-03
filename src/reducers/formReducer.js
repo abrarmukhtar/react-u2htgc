@@ -16,6 +16,10 @@ const formReducer = (state = initState, action) => {
           }
         ]
       };
+    case 'delete':
+      const newlist = state.newData.filter(elm => elm.id !== action.payload);
+
+      return state;
     default:
       return state;
   }

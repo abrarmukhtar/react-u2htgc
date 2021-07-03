@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import ContactForm from './ContactForm';
 import { useSelector, useDispatch } from 'react-redux';
+import { deleteRecord } from './actions/index';
 import firebasedb from './fire';
 
 const Contacts = () => {
   const [currentId, setCurrentId] = useState('');
 
-  const formData = useSelector(state => state.addReducer.newData);
-  console.log(formData);
+  const formData = useSelector(state => state.formReducer.newData);
+  const dispatch = useDispatch();
+
+  // console.log(formData);
   const addorEdit = obj => {};
 
   const deleteRecord = id => {};
@@ -28,7 +31,7 @@ const Contacts = () => {
 
         {formData.map((elm, index) => {
           return (
-            <tbody key={index}>
+            <tbody key={elm.id}>
               <tr>
                 <td scope="row">{elm.data.fname}</td>
                 <td scope="row">{elm.data.lname}</td>
@@ -44,13 +47,8 @@ const Contacts = () => {
                   </a>
 
                   <br />
-                  <a
-                    href="#"
-                    onClick={() => {
-                      return deleteRecord(index);
-                    }}
-                  >
-                    Delete
+                  <a href="#" onClick={() => dispatch(deleteRecord(elm.id))}>
+                    Delete {elm.id}
                   </a>
                 </td>
               </tr>
