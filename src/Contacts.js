@@ -11,7 +11,6 @@ const Contacts = () => {
 
   const dispatch = useDispatch();
 
-  console.log(formData);
   const addorEdit = obj => {};
 
   return (

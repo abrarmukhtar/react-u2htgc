@@ -31,12 +31,13 @@ const ContactForm = props => {
   const submitEvent = e => {
     e.preventDefault();
     dispatch(addRecord(inputData));
+    setInputData(initState);
     // if (inputData.lname == '' || inputData.fname == '') {
     // } else {
     //   props.addorEdit(inputData);
     //   setInputData(initData);
     // }
-    // document.getElementById('fname').focus();
+    document.getElementById('fname').focus();
   };
 
   const UpdateRecord = e => {
