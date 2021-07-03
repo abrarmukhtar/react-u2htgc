@@ -8,12 +8,11 @@ const Contacts = () => {
   const [currentId, setCurrentId] = useState('');
 
   const formData = useSelector(state => state.formReducer.newData);
+
   const dispatch = useDispatch();
 
-  // console.log(formData);
+  console.log(formData);
   const addorEdit = obj => {};
-
-  const deleteRecord = id => {};
 
   return (
     <>
